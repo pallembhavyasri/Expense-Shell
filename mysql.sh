@@ -35,21 +35,21 @@ validate $? "Enabling mysql"
 systemctl start mysqld &>>$logfile
 validate $? "Starting Mysql"
 
-mysql_secure_installation --set-root-pass B@bbi! &>>$logfile
-validate $? "setting up root password"
+#mysql_secure_installation --set-root-pass B@bbi! &>>$logfile
+#validate $? "setting up root password"
 
 #idempotency means for every run it will not consider newly once it is success and then rerun again it takes as failure
 #Since before is suucess and shells cript is not idempotent
 
-#mysql -h db.bhavya.store -uroot -pB@bbi! -e 'SHOW DATABASES' &>>$logfile 
-#if [ $? -eq 0 ]
-#then    
-    #echo "Already password setup is completed..$Y Skipping $N "
-#else
-    #mysql_secure_installation --set-root-pass B@bbi! &>>$logfile
-    #echo "Setting up password"
-    #validate $? "MYSQL Root pssword setup"
-#fi
+mysql -h db.bhavya.store -uroot -pB@bbi! -e 'SHOW DATABASES' &>>$logfile 
+if [ $? -eq 0 ]
+then    
+    echo "Already password setup is completed..$Y Skipping $N "
+else
+    mysql_secure_installation --set-root-pass B@bbi! &>>$logfile
+    echo "Setting up password"
+    validate $? "MYSQL Root pssword setup"
+fi
 
 
 
