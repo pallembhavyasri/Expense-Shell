@@ -12,9 +12,9 @@ N="\e[0m"
 validate()
 {
     if [ $1 -eq 0 ]
-        echo -e "$G $2...Success $N"
+        echo -e "$2...$G Success $N"
     else
-        echo -e "$R $2---Failure $N"
+        echo -e "$2---$R Failure $N"
 }
 
 if [ $user -eq 0 ] 
