@@ -9,12 +9,12 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-validate()
-{
+validate(){
     if [ $1 -eq 0 ]
         echo -e "$2...$G Success $N"
     else
         echo -e "$2---$R Failure $N"
+    fi
 }
 
 if [ $user -eq 0 ] 
