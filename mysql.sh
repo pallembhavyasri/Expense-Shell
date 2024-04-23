@@ -44,7 +44,7 @@ validate $? "Starting Mysql"
 mysql -h db.bhavya.store -uroot -pB@bbi1 -e 'SHOW DATABASES'; &>>$logfile 
 if [ $? -eq 0 ]
 then    
-    echo "Already password setup is completed..$Y Skipping $N"
+    echo -e "Already password setup is completed..$Y Skipping $N"
 else
     mysql_secure_installation --set-root-pass B@bbi1 &>>$logfile
     echo "Setting up password"
