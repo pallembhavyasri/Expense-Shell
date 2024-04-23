@@ -42,7 +42,7 @@ validate $? "Starting Mysql"
 #Since before is suucess and shells cript is not idempotent
 
 mysql -h db.bhavya.store -uroot -pB@bbi! -e 'SHOW DATABASES' &>>$logfile 
-if[ $? -eq 0 ]
+if [ $? -eq 0 ]
 then    
     echo "Already password setup is completed..$Y Skipping $N "
 else
