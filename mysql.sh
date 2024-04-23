@@ -9,6 +9,9 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+echo "Pls enter DB pswwd"
+read -s mysql_root_password
+
 validate(){
     if [ $1 -eq 0 ]
     then 
@@ -35,19 +38,18 @@ validate $? "Enabling mysql"
 systemctl start mysqld &>>$logfile
 validate $? "Starting Mysql"
 
-#mysql_secure_installation --set-root-pass B@bbi1 &>>$logfile
+# mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
 #validate $? "setting up root password"
 
 #idempotency means for every run it will not consider newly once it is success and then rerun again it takes as failure
 #Since before is suucess and shells cript is not idempotent
 
-mysql -h db.bhavya.store -uroot -p$B@bbi1 -e 'SHOW DATABASES'; &>>$logfile 
+mysql -h db.daws78s.online -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
 if [ $? -eq 0 ]
 then    
     echo -e "Already password setup is completed..$Y Skipping $N"
 else
-    mysql_secure_installation --set-root-pass B@bbi1 &>>$logfile
-    echo "Setting up password"
+    mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$logfile
     validate $? "MYSQL Root pssword setup"
 fi
 
