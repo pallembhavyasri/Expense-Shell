@@ -29,10 +29,10 @@ fi
 dnf install mysql-server -y &>>$logfile 
 validate $? "Installing Mysql"
 
-dnf enable mysqld -y &>>$logfile
+ststemctl enable mysqld -y &>>$logfile
 validate $? "Enabling mysql"
 
-dnf start mysqld -y &>>$logfile
+systemctl start mysqld -y &>>$logfile
 validate $? "Starting Mysql"
 
 mysql_secure_installation --set-root-pass B@bbi!234 &>>$logfile
