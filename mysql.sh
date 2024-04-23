@@ -24,7 +24,7 @@ then
 else
     echo -e " $R Run with root access $N"
     exit 1
-if
+fi
 
 dnf install mysql-server -y &>>$logfile 
 validate $? "Installing Mysql"
