@@ -9,6 +9,8 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+echo "Pls enter DB pswwd"
+read -s mysql_root_password
 
 validate(){
     if [ $1 -eq 0 ]
@@ -47,12 +49,48 @@ validate $? "Installing nodejs"
 id expense
 if [ $? -eq 0 ]
 then 
-    echo -e "User is $G created $N"
+    echo -e "User is created...$Y Skipping $N"
 else
     useradd expense
     validate $? "craeting user expense"
 fi
 
+# mkdir /app
+# validate $? "Craeting the folder"
+# The above will fail after first run because it is idempotent to overcome we just need to keep -p before mkdir so after success 
+# if we run again to will skip and doen't throw error 
 
+mkdir -p /app
+validate $? "Craeting the folder"
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>logfile
+validate $? "Downloading code from backend"
+
+
+cd /app
+rm -rf /app/*
+unzip /tmp/backend.zip
+validate $? "Unziping the backend code"
+
+npm install
+validate $? "Installing the dependencies"
+
+cp /home/ec2-user/Expense-Shell/Backend.service /etc/systemd/system/Backend.service
+validate $? "Copied backend.service"
+
+systemctl daemon-reload
+validate $? "Reloading the backend"
+
+systemctl start backend
+validate $? "Starting backend"
+
+systemctl enable backend
+validate $? "Enabling the backend"
+
+mysql -h db.bhavya.store -uroot -p${mysql_root_password} < /app/schema/backend.sql
+validate $? "Schema loading"
+
+systemctl restart backend
+validate $? "Restarting backend"
 
 
