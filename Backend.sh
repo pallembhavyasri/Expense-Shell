@@ -37,3 +37,8 @@ validate $? "Enabling nodejs:20"
 dnf install nodejs -y &>>logfile
 validate $? "Installing nodejs"
 
+useradd expense &>>logfile
+validate $? "User is added"
+
+
+
