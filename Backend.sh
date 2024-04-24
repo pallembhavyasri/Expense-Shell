@@ -60,37 +60,41 @@ fi
 # The above will fail after first run because it is idempotent to overcome we just need to keep -p before mkdir so after success 
 # if we run again to will skip and doen't throw error 
 
-mkdir -p /app
+mkdir -p /app &>>logfile
 validate $? "Craeting the folder"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>logfile
 validate $? "Downloading code from backend"
 
 
-cd /app
-rm -rf /app/*
-unzip /tmp/backend.zip
+cd /app 
+rm -rf /app/* 
+unzip /tmp/backend.zip &>>logfile
 validate $? "Unziping the backend code"
 
-npm install
+npm install &>>logfile
 validate $? "Installing the dependencies"
 
-cp /home/ec2-user/Expense-Shell/Backend.sh /etc/systemd/system/backend.service
+cp /home/ec2-user/Expense-Shell/Backend.sh /etc/systemd/system/backend.service &>>logfile
 validate $? "Copied backend.service"
 
-systemctl daemon-reload
+systemctl daemon-reload &>>logfile
 validate $? "Reloading the backend"
 
-systemctl start backend
+systemctl start backend &>>logfile
 validate $? "Starting backend"
 
-systemctl enable backend
+systemctl enable backend &>>logfile
 validate $? "Enabling the backend"
 
-mysql -h db.bhavya.store -uroot -p${mysql_root_password} < /app/schema/backend.sql
+
+dnf install mysql -y &>>logfile
+validate $? "Installing mysql"
+
+mysql -h db.bhavya.store -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>logfile
 validate $? "Schema loading"
 
-systemctl restart backend
+systemctl restart backend &>>logfile
 validate $? "Restarting backend"
 
 
