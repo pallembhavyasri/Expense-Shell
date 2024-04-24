@@ -37,8 +37,22 @@ validate $? "Enabling nodejs:20"
 dnf install nodejs -y &>>logfile
 validate $? "Installing nodejs"
 
-useradd expense &>>logfile
-validate $? "User is added"
+# useradd expense &>>logfile
+# validate $? "User is added"
+
+#the above is not correct since once the user is created for next time run it will fail. hence we need to do idemptency
+
+#id is command to find the user is present or not
+
+id expense
+if [ $? -eq 0 ]
+then 
+    echo "User is $G created $N"
+else
+    useradd expense
+    validate $? "craeting user expense"
+fi
+
 
 
 
