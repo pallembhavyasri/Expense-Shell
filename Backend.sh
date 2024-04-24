@@ -29,4 +29,4 @@ fi
 
 
 dnf module disable nodejs -y &>>logfile
-validate $? "Disabling nodejs:
+validate $? "Disabling nodejs"
