@@ -47,7 +47,7 @@ validate $? "Installing nodejs"
 id expense
 if [ $? -eq 0 ]
 then 
-    echo "User is $G created $N"
+    echo -e "User is $G created $N"
 else
     useradd expense
     validate $? "craeting user expense"
