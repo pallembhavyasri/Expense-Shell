@@ -45,7 +45,7 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>$logfile #here unzip is the idempotent because in the above step we are delecting everytime
 validate $? "Unziping the file"
 
-cp /home/ec2-user/Expense-Shell/Frontend.sh /etc/nginx/default.d/expense.conf &>>$logfile
+cp /home/ec2-user/Expense-Shell/Frontend.Service /etc/nginx/default.d/expense.conf &>>$logfile
 validate $? "copied the frontend service"
 
 systemctl restart nginx &>>$logfile
