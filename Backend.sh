@@ -30,3 +30,7 @@ fi
 
 dnf module disable nodejs -y &>>logfile
 validate $? "Disabling nodejs"
+
+dnf module enable nodejs:20 -y &>>logfile
+validate $? "Enabling nodejs:20"
+
