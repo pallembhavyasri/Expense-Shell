@@ -75,7 +75,7 @@ validate $? "Unziping the backend code"
 npm install &>>$logfile
 validate $? "Installing the dependencies"
 
-cp /home/ec2-user/Expense-Shell/backend.service /etc/systemd/system/backend.service &>>$logfile
+cp /home/ec2-user/Expense-Shell/Backend.Service /etc/systemd/system/backend.service &>>$logfile
 validate $? "Copied backend.service"
 
 systemctl daemon-reload &>>$logfile
