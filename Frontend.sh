@@ -48,7 +48,7 @@ validate $? "Unziping the file"
 cp /home/ec2-user/Expense-Shell/Frontend.sh /etc/nginx/default.d/expense.conf &>>$logfile
 validate $? "copied the frontend service"
 
-systemctl restart nginx
+systemctl restart nginx &>>$logfile
 validate $? "Restartting Nginx"
 
 
