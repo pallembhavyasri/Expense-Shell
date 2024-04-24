@@ -91,7 +91,7 @@ validate $? "Enabling the backend"
 dnf install mysql -y &>>$logfile
 validate $? "Installing mysql"
 
-mysql -h db.bhavya.store -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>logfile
+mysql -h db.bhavya.store -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$logfile
 validate $? "Schema loading"
 
 systemctl restart backend &>>$logfile
