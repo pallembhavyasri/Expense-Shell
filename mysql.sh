@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# sourse ./Common.sh
 
-# Check_root
 
 
 user=$(id -u)
@@ -24,15 +22,15 @@ validate(){
     fi
 }
 
-Check_root(){
-    if [ $user -eq 0 ] 
+
+if [ $user -eq 0 ] 
     then    
         echo -e "user is having $G root access $N" 
     else
         echo -e " $R Run with root access $N"
         exit 1
-    fi
-}
+fi
+
 
 
 echo "Pls enter DB pswwd"
