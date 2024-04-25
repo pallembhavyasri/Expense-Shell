@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-
-
 user=$(id -u)
 timestamp=$(date +%F-%H-%M-%S)
 scriptname=$( echo $0 | cut -d "." -f1)
@@ -12,6 +9,8 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"       
 
+echo "Pls enter DB pswwd"
+read -s mysql_root_password
 
 validate(){
     if [ $1 -eq 0 ]
@@ -32,9 +31,6 @@ if [ $user -eq 0 ]
 fi
 
 
-
-echo "Pls enter DB pswwd"
-read -s mysql_root_password
 
 dnf install mysql-server -y &>>$logfile 
 validate $? "Installing Mysql"
