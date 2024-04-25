@@ -2,7 +2,7 @@
 
 sourse ./Common.sh
 
-Check_root()
+Check_root
 
 echo "Pls enter DB pswd"
 read -s mysql_root_password
